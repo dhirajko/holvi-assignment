@@ -1,10 +1,12 @@
 from django.urls import path
 
-from fintech.views import UserList, AccountDetail, AccountListCreateView
+from fintech.views import AllAccountDetails, SelectedAccountDetail, AllTransactions, UserDetails
 
 urlpatterns = [
 
-    path('users', UserList.as_view(), name='accounts'),
-    path('create', AccountListCreateView.as_view(), name='account_list'),
-    path('<ac_uuid>', AccountDetail.as_view(), name='account_detail'),
+    path('users', UserDetails.as_view(), name='accounts'),
+    path('accountDetails', AllAccountDetails.as_view(), name='account_list'),
+    path('<ac_uuid>/balance', SelectedAccountDetail .as_view(), name='account_detail'),
+    path('transactions', AllTransactions.as_view(), name='account_list'),
+
 ]

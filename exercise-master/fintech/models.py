@@ -23,6 +23,9 @@ class Account(models.Model):
         return f'Account: {self.name} - {self.uuid}'
 
 
+
+
+
 class Transaction(models.Model):
     """
     Records transactions on account. You can think of these as entries
@@ -41,3 +44,5 @@ class Transaction(models.Model):
     active = models.BooleanField()
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
+
+
