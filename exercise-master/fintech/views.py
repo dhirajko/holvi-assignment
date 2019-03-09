@@ -25,25 +25,25 @@ class AllAccountDetails(APIView):
     # return all account of current user
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            accounts = Account.objects.all().filter(user_id=request.user.id)
-            serializer = AccountSerializer(accounts, many=True)
+            account = Account.objects.get(user_id=request.user.id)
+            serializer = AccountSerializer(account)
             return Response(serializer.data)
         else:
             return Response('User Not logged in')
-    #create new Account
+
+    # create new Account
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             name = request.data['name']
             balance = request.data['balance']
-            user = get_object_or_404(User,id=request.user.id)
-            account=Account(name=name,balance=balance,user=user)
+            request.data['user_id'] = request.user.id
+            user = get_object_or_404(User, id=request.user.id)
+            account = Account(name=name, balance=balance, user=user)
             account.save()
-
             return Response(AccountSerializer(account).data)
+
         else:
             return Response('User Not logged in')
-
-
 
 
 class SelectedAccountDetail(APIView):
@@ -52,55 +52,56 @@ class SelectedAccountDetail(APIView):
     def get(self, request, ac_uuid, *args, **kwargs):
         if request.user.is_authenticated:
             account = get_object_or_404(Account, uuid=ac_uuid, user_id=request.user.id)
+            if not account:
+                return Response('Warning!!! cannot acess to others account')
             serializer = AccountSerializer(account)
             return Response(serializer.data['balance'])
         else:
-            return Response('User Not logged in')
+            return Response('User Not logged in ')
 
 
 class AllTransactions(APIView):
 
-    # return all the transaction of logged in user ( all accounts)
+    # return all the active transaction of logged in user ( all accounts)
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             accounts = Account.objects.all().filter(user_id=request.user.id)
 
             for account in accounts:
                 serializer = AccountSerializer(account)
-                accountId = serializer.data['uuid']
-                transactions = Transaction.objects.all().filter(account_id=accountId)
+                account_id = serializer.data['uuid']
+                transactions = Transaction.objects.all().filter(account_id=account_id, active=True)
                 serializer = TransactionSerializer(transactions, many=True)
                 return Response(serializer.data)
         else:
             return Response('User Not logged in')
 
     # for creating new transaction
-    def post(self, request, *args, **kwargs):                                       #still working on this
+    def post(self, request, *args, **kwargs):  # still working on this
         if request.user.is_authenticated:
 
-            accounts = Account.objects.all().filter(user_id=request.user.id)
-            for account in accounts:
-                serializedAccount = AccountSerializer(account)
-                balance = Decimal(serializedAccount.data['balance'])
-                transactionAmount = Decimal(request.data['amount'])
+            account = Account.objects.get(user_id=request.user.id)
 
-                if (balance >= transactionAmount):
-                    # request.data['account_id'] = serializedAccount.data.get('uuid')
+            transaction_date = request.data['transaction_date']
+            amount = request.data['amount']
+            description = request.data['description']
+            active = request.data['active']
 
-                    serializer = TransactionSerializer(data=request.data)
-                    print(request.data, flush=True)
+            new_balance = Decimal(account.balance) - Decimal(amount)
 
-                    if serializer.is_valid():
-                        print(serializer.data, flush=True)
-                        # serializer.save()
-                        # newBalance = balance - transactionAmount
-                        # serializedAccount.update(balance=newBalance)
-                        return Response(serializer.validated_data)
-                    else:
-                        return Response('seralize unvalid')
+            if (new_balance >= 0):
+                new_Transaction = Transaction(transaction_date=transaction_date,
+                                              amount=amount,
+                                              description=description,
+                                              active=active,
+                                              account=account)
+                new_Transaction.save()
+                print(new_balance)
+                Account.objects.filter(uuid=account.uuid).update(balance=new_balance)
+                if (active):
+                    return Response(TransactionSerializer(new_Transaction).data)
                 else:
-                    return Response('Balance in sufficient')
-            return Response('No account found for transaction')
-
+                    return Response('Transaction saved')
+            return Response(' Insufficient Balance')
         else:
             return Response('User Not logged in')
