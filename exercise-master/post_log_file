@@ -1,0 +1,1 @@
+Deposit by User1 with {'uuid': 'ab5514b3-dcac-4dbd-bc55-552c36aefc6b', 'transaction_date': '2019-03-20', 'amount': '45.00', 'description': 'purchas', 'active': True, 'account_id': UUID('e427fc37-f67b-4188-b1d3-b8c339236eaf')} 
