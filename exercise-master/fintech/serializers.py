@@ -24,8 +24,7 @@ class AccountSerializer(serializers.ModelSerializer):
 
 
 class TransactionSerializer(serializers.ModelSerializer):
-    #account_id = serializers.RelatedField(source='Account', read_only=True)
-    #account_id=AccountSerializer(many=True, read_only=True)
+
     class Meta:
         model = Transaction
         fields = ('uuid', 'transaction_date', 'amount', 'description', 'active', 'account_id')
