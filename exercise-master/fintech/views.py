@@ -39,8 +39,8 @@ class SelectedUserDetails(APIView):
 
 
 
-# accounts/accountDetails
-class AllAccountDetails(APIView):
+# accounts/accountList
+class AccountList(APIView):
 
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -62,14 +62,16 @@ class AllAccountDetails(APIView):
         return Response(serializer.data, status=HTTP_201_CREATED)
 
 
-# accounts/accountDetails/<user_id>
-class SelectedAccountDetails(APIView):
+# accounts/<user_id>/accounts
+class UserAccount(APIView):
 
     def get(self, request,user_id, *args, **kwargs):
         if not request.user.is_authenticated:
             return Response('User Not logged in')
-        if not(request.user.is_staff or request.user.id==user_id):
-            return Response('Un authorized user')
+        print(request.user.id)
+        print(user_id)
+        if not (request.user.is_staff or request.user.id==int(user_id)):
+            return Response('Unauthorized user')
         serialized_accounts=account_utility.search_account(user_id)
         return Response(serialized_accounts)
 
@@ -77,7 +79,7 @@ class SelectedAccountDetails(APIView):
 
 
 #<ac_uuid>/balance
-class SelectedAccountDetail(APIView):
+class SelectedAccountBalance(APIView):
 
     def get(self, request, ac_uuid, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -108,7 +110,7 @@ class SelectedUsersTransactions(APIView):
     def get(self, request,user_id, *args, **kwargs):
         if not request.user.is_authenticated:
             return Response('User Not logged in')
-        if not (request.user.is_staff or request.user.id==user_id):
+        if not (request.user.is_staff or request.user.id==int(user_id)):
             return Response('Un authorized user')
         serialized_account=transaction_utility.serarch_transactions_by_user_id(user_id)
         return Response(serialized_account)
@@ -122,8 +124,7 @@ class SelectedAccountTransactions(APIView):
         if not request.user.is_authenticated:
             return Response('User Not logged in')
         account=get_object_or_404(Account,uuid=ac_uuid)
-        print('I am here')
-        if not (request.user.is_staff or request.user.id==account.user):
+        if not (request.user.is_staff or request.user.id==account.user.id):
             return Response('Un authorized user')
         transactions = Transaction.objects.filter(account=account, active=True)
         serializer = TransactionSerializer(transactions, many=True)
@@ -170,6 +171,3 @@ class DepositView(APIView):
         account.save()
         post_log_file.post_log('Deposit',request.user.id,serializer.data)
         return Response(serializer.data, status=HTTP_201_CREATED)
-
-
-

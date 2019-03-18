@@ -1,19 +1,19 @@
 from django.urls import path
 
-from fintech.views import AllAccountDetails, SelectedAccountDetail, AllTransactions, UserDetails, WithdrawView,DepositView,SelectedAccountDetails,SelectedUsersTransactions,SelectedAccountTransactions,SelectedUserDetails
+from fintech.views import AccountList, SelectedAccountBalance, AllTransactions, UserDetails, WithdrawView,DepositView,SelectedUsersTransactions,SelectedAccountTransactions,SelectedUserDetails,UserAccount
 
 urlpatterns = [
 
     path('users', UserDetails.as_view(), name='accounts'),
-    path('users/<user_id>', SelectedUserDetails.as_view(), name='accounts'),
+    path('users/<user_id>', SelectedUserDetails.as_view(), name='accounts_by_id'),
 
-    path('accountDetails', AllAccountDetails.as_view(), name='account_list'),
-    path('accountDetails/<user_id>', SelectedAccountDetails .as_view(), name='selected_account_detail'),
-    path('<ac_uuid>/balance', SelectedAccountDetail .as_view(), name='selected_account_balance'),
+    path('accountsList', AccountList.as_view(), name='account_list'),
+    path('<user_id>/accounts', UserAccount .as_view(), name='selected_user_account_detail'),
+    path('<ac_uuid>/balance', SelectedAccountBalance .as_view(), name='selected_account_balance'),
 
     path('transactions', AllTransactions.as_view(), name='own_transacton_list'),
-    path('<ac_uuid>/transactions', SelectedAccountTransactions.as_view(), name='own_transacton_list'),
-    path('transactions/<user_id>', SelectedUsersTransactions.as_view(), name='any_user_transaction_list'),
+    path('<ac_uuid>/transactions', SelectedAccountTransactions.as_view(), name='selected_account_transacton_list'),
+    path('transactions/<user_id>', SelectedUsersTransactions.as_view(), name='selected_user_transaction_list'),
     path('<account_id>/withdraw',WithdrawView.as_view(),name='withdraw_transaction'),
     path('<account_id>/deposit',DepositView.as_view(),name='deposit_transaction')
 

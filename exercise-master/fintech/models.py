@@ -6,7 +6,6 @@ from django.db import models
 class Account(models.Model):
     """
     Represents a bank account in the system.
-
     The users of Account and Transaction model should make sure that the
     following conditions are always True:
         account.balance == sum(
@@ -44,5 +43,3 @@ class Transaction(models.Model):
     active = models.BooleanField()
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
-
-
