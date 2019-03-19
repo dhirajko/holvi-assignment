@@ -7,28 +7,29 @@ from rest_framework.status import HTTP_201_CREATED
 from rest_framework.views import APIView
 from fintech.models import Account, Transaction
 from fintech.serializers import UserSerializer, AccountSerializer, TransactionSerializer
-from fintech.utility import AccountUtility, TranasactionUtility,LogTranaction
+from fintech.utility import AccountUtility, TranasactionUtility, LogTranaction
+
+account_utility = AccountUtility()
+transaction_utility = TranasactionUtility()
+post_log_file = LogTranaction('post_log_file')
 
 
-account_utility=AccountUtility()
-transaction_utility=TranasactionUtility()
-post_log_file=LogTranaction('post_log_file')
-
-#accounts/users
+# accounts/users
 class UserDetails(APIView):
 
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return Response('User not logged in')
-        users = get_object_or_404(User,id=request.user.id)
+        users = get_object_or_404(User, id=request.user.id)
         serializer = UserSerializer(users)
+
         return Response(serializer.data)
 
 
-#accounts/users/<user_id>
+# accounts/users/<user_id>
 class SelectedUserDetails(APIView):
 
-    def get(self, request,user_id, *args, **kwargs):
+    def get(self, request, user_id, *args, **kwargs):
         if not request.user.is_authenticated:
             return Response('User not logged in')
         if not request.user.is_staff:
@@ -38,14 +39,13 @@ class SelectedUserDetails(APIView):
         return Response(serializer.data)
 
 
-
 # accounts/accountList
 class AccountList(APIView):
 
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return Response('User Not logged in')
-        serialized_accounts=account_utility.search_account(request.user.id)
+        serialized_accounts = account_utility.search_account(request.user.id)
         return Response(serialized_accounts)
 
     def post(self, request, *args, **kwargs):
@@ -58,27 +58,25 @@ class AccountList(APIView):
         if not serializer.is_valid():
             return Response(serializer.error_messages)
         serializer.save(user=user)
-        post_log_file.post_log('create user',request.user.id,serializer.data)
+        post_log_file.post_log('create user', request.user.id, serializer.data)
         return Response(serializer.data, status=HTTP_201_CREATED)
 
 
 # accounts/<user_id>/accounts
 class UserAccount(APIView):
 
-    def get(self, request,user_id, *args, **kwargs):
+    def get(self, request, user_id, *args, **kwargs):
         if not request.user.is_authenticated:
             return Response('User Not logged in')
         print(request.user.id)
         print(user_id)
-        if not (request.user.is_staff or request.user.id==int(user_id)):
+        if not (request.user.is_staff or request.user.id == int(user_id)):
             return Response('Unauthorized user')
-        serialized_accounts=account_utility.search_account(user_id)
+        serialized_accounts = account_utility.search_account(user_id)
         return Response(serialized_accounts)
 
 
-
-
-#<ac_uuid>/balance
+# <ac_uuid>/balance
 class SelectedAccountBalance(APIView):
 
     def get(self, request, ac_uuid, *args, **kwargs):
@@ -93,43 +91,40 @@ class SelectedAccountBalance(APIView):
         return Response(serializer.data['balance'])
 
 
-
-#accounts/transactions
+# accounts/transactions
 class AllTransactions(APIView):
 
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return Response('User Not logged in')
-        serialized_transactions=transaction_utility.serarch_transactions_by_user_id(request.user.id)
+        serialized_transactions = transaction_utility.serarch_transactions_by_user_id(request.user.id)
         return Response(serialized_transactions)
 
 
-#accounts/transactions/<user_id>
+# accounts/transactions/<user_id>
 class SelectedUsersTransactions(APIView):
 
-    def get(self, request,user_id, *args, **kwargs):
+    def get(self, request, user_id, *args, **kwargs):
         if not request.user.is_authenticated:
             return Response('User Not logged in')
-        if not (request.user.is_staff or request.user.id==int(user_id)):
+        if not (request.user.is_staff or request.user.id == int(user_id)):
             return Response('Un authorized user')
-        serialized_account=transaction_utility.serarch_transactions_by_user_id(user_id)
+        serialized_account = transaction_utility.serarch_transactions_by_user_id(user_id)
         return Response(serialized_account)
 
 
-
-#accounts/<ac_id>/transactions
+# accounts/<ac_id>/transactions
 class SelectedAccountTransactions(APIView):
 
-    def get(self, request,ac_uuid, *args, **kwargs):
+    def get(self, request, ac_uuid, *args, **kwargs):
         if not request.user.is_authenticated:
             return Response('User Not logged in')
-        account=get_object_or_404(Account,uuid=ac_uuid)
-        if not (request.user.is_staff or request.user.id==account.user.id):
+        account = get_object_or_404(Account, uuid=ac_uuid)
+        if not (request.user.is_staff or request.user.id == account.user.id):
             return Response('Un authorized user')
         transactions = Transaction.objects.filter(account=account, active=True)
         serializer = TransactionSerializer(transactions, many=True)
         return Response(serializer.data)
-
 
 
 # /accounts/<account_id>/withdraw
@@ -150,7 +145,7 @@ class WithdrawView(APIView):
         serializer.save(account=account)
         account.balance = new_balance
         account.save()
-        post_log_file.post_log('withdraw',request.user.id,serializer.data)
+        post_log_file.post_log('withdraw', request.user.id, serializer.data)
         return Response(serializer.data, status=HTTP_201_CREATED)
 
 
@@ -169,5 +164,5 @@ class DepositView(APIView):
         serializer.save(account=account)
         account.balance = new_balance
         account.save()
-        post_log_file.post_log('Deposit',request.user.id,serializer.data)
+        post_log_file.post_log('Deposit', request.user.id, serializer.data)
         return Response(serializer.data, status=HTTP_201_CREATED)

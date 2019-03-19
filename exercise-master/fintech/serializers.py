@@ -10,7 +10,7 @@ from fintech.models import Account, Transaction
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name')
+        fields = ('id', 'username', 'email')
 
 
 class AccountSerializer(serializers.ModelSerializer):
