@@ -22,7 +22,6 @@ class UserDetails(APIView):
             return Response('User not logged in')
         users = get_object_or_404(User, id=request.user.id)
         serializer = UserSerializer(users)
-
         return Response(serializer.data)
 
 

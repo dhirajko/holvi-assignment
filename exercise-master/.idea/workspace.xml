@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e21748c5-5060-4158-98c5-ef4780006bab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/fintech/tests/test_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/exercise-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/exercise-master.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fintech/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/fintech/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fintech/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fintech/tests/test_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/fintech/tests/test_views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fintech/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/fintech/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,27 +33,16 @@
     <favorites_list name="exercise-master" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5991432">
+    <splitter split-orientation="horizontal" split-proportion="0.65954417">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/fintech/tests/test_views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="353">
-                  <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+                <state relative-caret-position="218">
+                  <caret line="72" column="47" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="47" />
                   <folding>
                     <element signature="e#0#15#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/fintech/tests/test_urls.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-583">
-                  <folding>
-                    <element signature="e#0#38#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -69,24 +51,12 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/fintech/urls.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="133">
-                  <caret line="7" column="68" selection-start-line="7" selection-start-column="65" selection-end-line="7" selection-end-column="79" />
-                  <folding>
-                    <element signature="e#0#28#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/fintech/views.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+                <state relative-caret-position="114">
+                  <caret line="6" column="55" selection-start-line="6" selection-start-column="47" selection-end-line="6" selection-end-column="55" />
                   <folding>
                     <element signature="e#0#28#0" expanded="true" />
                   </folding>
@@ -95,10 +65,22 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/fintech/views.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-323">
+                  <caret line="28" column="25" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="25" />
+                  <folding>
+                    <element signature="e#0#28#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/fintech/serializers.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="160">
-                  <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
+                <state relative-caret-position="11">
+                  <caret line="12" column="43" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="43" />
                   <folding>
                     <element signature="e#0#43#0" expanded="true" />
                   </folding>
@@ -110,7 +92,7 @@
             <entry file="file://$PROJECT_DIR$/fintech/models.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="285">
-                  <caret line="36" column="33" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
+                  <caret line="18" column="39" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="39" />
                   <folding>
                     <element signature="e#0#11#0" expanded="true" />
                   </folding>
@@ -156,8 +138,8 @@
         <option value="$PROJECT_DIR$/fintech/urls.py" />
         <option value="$PROJECT_DIR$/postlog.txt" />
         <option value="$PROJECT_DIR$/fintech/utility.py" />
-        <option value="$PROJECT_DIR$/fintech/views.py" />
         <option value="$PROJECT_DIR$/fintech/serializers.py" />
+        <option value="$PROJECT_DIR$/fintech/views.py" />
         <option value="$PROJECT_DIR$/fintech/tests/test_views.py" />
       </list>
     </option>
@@ -168,9 +150,9 @@
     </ignored-facets>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1792" />
-    <option name="y" value="73" />
-    <option name="width" value="1613" />
+    <option name="x" value="1734" />
+    <option name="y" value="237" />
+    <option name="width" value="1603" />
     <option name="height" value="787" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -265,18 +247,19 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1551623282800</updated>
-      <workItem from="1553020492221" duration="8000000" />
+      <workItem from="1553020492221" duration="8175000" />
+      <workItem from="1553075148145" duration="10049000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8000000" />
+    <option name="totallyTimeSpent" value="18224000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1680" y="-2" width="1680" height="1052" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49747476" weight="0.14075887" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49747476" visible="true" weight="0.14075887" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.50252527" side_tool="true" weight="0.11949306" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -290,7 +273,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.41928494" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.23618636" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3297587" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -422,29 +405,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fintech/tests.py">
+    <entry file="file://$PROJECT_DIR$/fintech/tests.py" />
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/unittest/__init__.pyi">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fintech/tests/test_urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-583">
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="168">
+          <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fintech/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
-          <caret line="36" column="33" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
+          <caret line="18" column="39" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="39" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
@@ -453,18 +425,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fintech/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="68" selection-start-line="7" selection-start-column="65" selection-end-line="7" selection-end-column="79" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fintech/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+        <state relative-caret-position="114">
+          <caret line="6" column="55" selection-start-line="6" selection-start-column="47" selection-end-line="6" selection-end-column="55" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
@@ -473,18 +435,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fintech/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
+        <state relative-caret-position="11">
+          <caret line="12" column="43" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="43" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/fintech/tests/test_urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-86">
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fintech/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-323">
+          <caret line="28" column="25" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/fintech/tests/test_views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+        <state relative-caret-position="218">
+          <caret line="72" column="47" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="47" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
