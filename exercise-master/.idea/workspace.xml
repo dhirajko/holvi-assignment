@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e21748c5-5060-4158-98c5-ef4780006bab" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fintech/tests/test_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/fintech/tests/test_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fintech/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/fintech/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="e21748c5-5060-4158-98c5-ef4780006bab" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +35,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/fintech/tests/test_views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="329">
-                  <caret line="135" column="85" selection-start-line="135" selection-start-column="85" selection-end-line="135" selection-end-column="85" />
+                <state relative-caret-position="462">
+                  <caret line="136" column="82" lean-forward="true" selection-start-line="136" selection-start-column="82" selection-end-line="136" selection-end-column="82" />
                   <folding>
                     <element signature="e#0#15#0" expanded="true" />
                   </folding>
@@ -250,12 +246,12 @@
       <option name="presentableId" value="Default" />
       <updated>1551623282800</updated>
       <workItem from="1553020492221" duration="8175000" />
-      <workItem from="1553075148145" duration="21890000" />
+      <workItem from="1553075148145" duration="22121000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30065000" />
+    <option name="totallyTimeSpent" value="30296000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1680" y="-2" width="1680" height="1052" extended-state="6" />
@@ -473,8 +469,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fintech/tests/test_views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="135" column="85" selection-start-line="135" selection-start-column="85" selection-end-line="135" selection-end-column="85" />
+        <state relative-caret-position="462">
+          <caret line="136" column="82" lean-forward="true" selection-start-line="136" selection-start-column="82" selection-end-line="136" selection-end-column="82" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
