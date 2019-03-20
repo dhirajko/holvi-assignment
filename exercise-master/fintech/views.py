@@ -43,20 +43,23 @@ class AccountList(APIView):
 
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            return Response('User Not logged in')
+            return Response('User not logged in')
         serialized_accounts = account_utility.search_account(request.user.id)
         return Response(serialized_accounts)
 
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            return Response('User must be logged in')
+            return Response('User not logged in')
         if not request.user.is_staff:
             return Response('Only staff can create account for customer')
-        user = get_object_or_404(User, id=request.user.id)
+
+        user = get_object_or_404(User, id=request.data['user'])
+
+
         serializer = AccountSerializer(data=request.data)
         if not serializer.is_valid():
             return Response(serializer.error_messages)
-        serializer.save(user=user)
+        #serializer.save(user=user)
         post_log_file.post_log('create user', request.user.id, serializer.data)
         return Response(serializer.data, status=HTTP_201_CREATED)
 
@@ -66,7 +69,7 @@ class UserAccount(APIView):
 
     def get(self, request, user_id, *args, **kwargs):
         if not request.user.is_authenticated:
-            return Response('User Not logged in')
+            return Response('User not logged in')
         print(request.user.id)
         print(user_id)
         if not (request.user.is_staff or request.user.id == int(user_id)):
