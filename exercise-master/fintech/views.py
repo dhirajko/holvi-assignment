@@ -14,76 +14,74 @@ transaction_utility = TranasactionUtility()
 post_log_file = LogTranaction('post_log_file')
 
 
-# accounts/users
+#user
 class UserDetails(APIView):
 
     def get(self, request, *args, **kwargs):
+        print(request.user.id)
         if not request.user.is_authenticated:
-            return Response('User not logged in')
+            return Response(data='User not logged in',status=403)
         users = get_object_or_404(User, id=request.user.id)
         serializer = UserSerializer(users)
         return Response(serializer.data)
 
 
-# accounts/users/<user_id>
+#user/<user_id>
 class SelectedUserDetails(APIView):
 
     def get(self, request, user_id, *args, **kwargs):
         if not request.user.is_authenticated:
-            return Response('User not logged in')
+            return Response(data='User not logged in',status=403)
         if not request.user.is_staff:
-            return Response('Only staff can view account for customer')
+            return Response(data='Only staff can view account for customer',status=401)
         user = get_object_or_404(User, id=user_id)
         serializer = UserSerializer(user)
-        return Response(serializer.data)
+        return Response(serializer.data,status=200)
 
 
-# accounts/accountList
+#accounts
 class AccountList(APIView):
 
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            return Response('User not logged in')
+            return Response(data='User not logged in',status=403)
         serialized_accounts = account_utility.search_account(request.user.id)
         return Response(serialized_accounts)
 
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            return Response('User not logged in')
+            return Response(data='User not logged in',status=403)
         if not request.user.is_staff:
-            return Response('Only staff can create account for customer')
+            return Response(data='Only staff can view account for customer',status=401)
 
         user = get_object_or_404(User, id=request.data['user'])
-
-
         serializer = AccountSerializer(data=request.data)
         if not serializer.is_valid():
             return Response(serializer.error_messages)
-        #serializer.save(user=user)
+        serializer.save(user=user)
         post_log_file.post_log('create user', request.user.id, serializer.data)
         return Response(serializer.data, status=HTTP_201_CREATED)
 
 
-# accounts/<user_id>/accounts
+#<user_id>/accounts
 class UserAccount(APIView):
 
     def get(self, request, user_id, *args, **kwargs):
         if not request.user.is_authenticated:
-            return Response('User not logged in')
+            return Response(data='User not logged in',status=403)
         print(request.user.id)
-        print(user_id)
         if not (request.user.is_staff or request.user.id == int(user_id)):
-            return Response('Unauthorized user')
+            return Response('Unauthorized user',status=401)
         serialized_accounts = account_utility.search_account(user_id)
         return Response(serialized_accounts)
 
 
-# <ac_uuid>/balance
+#<ac_uuid>/balance
 class SelectedAccountBalance(APIView):
 
     def get(self, request, ac_uuid, *args, **kwargs):
         if not request.user.is_authenticated:
-            return Response('User Not logged in ')
+            return Response(data='User not logged in', status=403)
         if not request.user.is_staff:
             account = get_object_or_404(Account, uuid=ac_uuid, user_id=request.user.id)
             serializer = AccountSerializer(account)
@@ -93,49 +91,49 @@ class SelectedAccountBalance(APIView):
         return Response(serializer.data['balance'])
 
 
-# accounts/transactions
+#transactions
 class AllTransactions(APIView):
 
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            return Response('User Not logged in')
+            return Response(data='User not logged in', status=403)
         serialized_transactions = transaction_utility.serarch_transactions_by_user_id(request.user.id)
         return Response(serialized_transactions)
 
 
-# accounts/transactions/<user_id>
+#<user_id>/accounts/transactions
 class SelectedUsersTransactions(APIView):
 
     def get(self, request, user_id, *args, **kwargs):
         if not request.user.is_authenticated:
-            return Response('User Not logged in')
+            return Response(data='User not logged in', status=403)
         if not (request.user.is_staff or request.user.id == int(user_id)):
-            return Response('Un authorized user')
+            return Response('Unauthorized user',status=401)
         serialized_account = transaction_utility.serarch_transactions_by_user_id(user_id)
         return Response(serialized_account)
 
 
-# accounts/<ac_id>/transactions
+# <ac_uuid>/transactions
 class SelectedAccountTransactions(APIView):
 
     def get(self, request, ac_uuid, *args, **kwargs):
         if not request.user.is_authenticated:
-            return Response('User Not logged in')
+            return Response(data='User not logged in', status=403)
         account = get_object_or_404(Account, uuid=ac_uuid)
         if not (request.user.is_staff or request.user.id == account.user.id):
-            return Response('Un authorized user')
+            return Response('Unauthorized user', status=401)
         transactions = Transaction.objects.filter(account=account, active=True)
         serializer = TransactionSerializer(transactions, many=True)
         return Response(serializer.data)
 
 
-# /accounts/<account_id>/withdraw
+# <account_id>/withdraw
 class WithdrawView(APIView):
 
     @transaction.atomic()
     def post(self, request, account_id, *args, **kwargs):
         if not request.user.is_authenticated:
-            return Response('User must be logged in')
+            return Response(data='User not logged in', status=403)
         account = get_object_or_404(Account, uuid=account_id)
         print(account.uuid)
         serializer = TransactionSerializer(data=request.data)
@@ -143,7 +141,7 @@ class WithdrawView(APIView):
             return Response(serializer.error_messages)
         new_balance = Decimal(account.balance) - Decimal(request.data['amount'])
         if new_balance <= 0:
-            return Response('Not enough balance to withdraw')
+            return Response('Not enough balance to withdraw',status=412)
         serializer.save(account=account)
         account.balance = new_balance
         account.save()
@@ -151,7 +149,7 @@ class WithdrawView(APIView):
         return Response(serializer.data, status=HTTP_201_CREATED)
 
 
-# /accounts/<account_id>/deposit
+#<account_id>/deposit
 class DepositView(APIView):
 
     @transaction.atomic()

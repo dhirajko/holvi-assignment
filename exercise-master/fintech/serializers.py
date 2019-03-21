@@ -14,7 +14,6 @@ class UserSerializer(ModelSerializer):
 
 
 class AccountSerializer(serializers.ModelSerializer):
-    #uuid=serializers.UUIDField(format='hex')
     user = PrimaryKeyRelatedField(read_only=True)
 
     class Meta:

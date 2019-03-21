@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/dhiraj/Working Folder/holvi/exercise-master/venv"
+set -gx VIRTUAL_ENV "/home/dhiraj/working_folder/git_backup/holvi-assignment/exercise-master/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

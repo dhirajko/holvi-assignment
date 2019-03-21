@@ -13,6 +13,7 @@ class AccountUtility:
             serialized_accounts.append(serializer.data)
         return serialized_accounts
 
+
 class TranasactionUtility:
     def serarch_transactions_by_user_id(self,user_id):
         accounts = Account.objects.all().filter(user_id=user_id)
@@ -22,6 +23,7 @@ class TranasactionUtility:
             serializer = TransactionSerializer(transactions, many=True)
             serialized_transactions.append(serializer.data)
         return serialized_transactions
+
 
 class LogTranaction:
     def __init__(self,filename):

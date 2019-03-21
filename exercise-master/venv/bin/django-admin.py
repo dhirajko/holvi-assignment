@@ -1,4 +1,4 @@
-#!/home/dhiraj/Working Folder/holvi/exercise-master/venv/bin/python
+#!/home/dhiraj/working_folder/git_backup/holvi-assignment/exercise-master/venv/bin/python
 from django.core import management
 
 if __name__ == "__main__":
