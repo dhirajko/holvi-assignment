@@ -9,8 +9,16 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-
 import os
+from dotenv import load_dotenv
+from pathlib import Path
+
+
+#env file path setup
+load_dotenv()
+env_path = Path('..') / '.env'
+load_dotenv(dotenv_path=env_path)
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +28,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ')-5#!4x4r6&_6fgdodmd$3t5!2qht=wtsb*!axotq5ap9=hf7@'
+SECRET_KEY = os.getenv("SECRET_KEY")
+#SECRET_KEY = ')-5#!4x4r6&_6fgdodmd$3t5!2qht=wtsb*!axotq5ap9=hf7@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,11 +87,11 @@ WSGI_APPLICATION = 'engineering_exercise.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'holvi',
-        'USER': 'dhiraj',
-        'PASSWORD': '12345',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv('NAME'),
+        'USER': os.getenv('USER'),
+        'PASSWORD': os.getenv('PASSWORD'),
+        'HOST': os.getenv('HOST'),
+        'PORT': os.getenv('PORT'),
     }
 }
 

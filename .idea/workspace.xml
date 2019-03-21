@@ -3,26 +3,39 @@
   <component name="ChangeListManager">
     <list default="true" id="301afbc4-2cd5-4f8a-b2ee-7fa2860b806c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/holvi-assignment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/holvi-assignment.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/engineering_exercise/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/exercise-master/engineering_exercise/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/fintech/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/exercise-master/fintech/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/fintech/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/exercise-master/fintech/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/fintech/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/exercise-master/fintech/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/fintech/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/exercise-master/fintech/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/fintech/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/exercise-master/fintech/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/post_log_file" beforeDir="false" afterPath="$PROJECT_DIR$/exercise-master/post_log_file" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/pytest.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/venv/bin/activate" beforeDir="false" afterPath="$PROJECT_DIR$/exercise-master/venv/bin/activate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/venv/bin/activate.csh" beforeDir="false" afterPath="$PROJECT_DIR$/exercise-master/venv/bin/activate.csh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/venv/bin/activate.fish" beforeDir="false" afterPath="$PROJECT_DIR$/exercise-master/venv/bin/activate.fish" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/venv/bin/easy_install" beforeDir="false" afterPath="$PROJECT_DIR$/exercise-master/venv/bin/easy_install" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/venv/bin/easy_install-3.6" beforeDir="false" afterPath="$PROJECT_DIR$/exercise-master/venv/bin/easy_install-3.6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/venv/bin/pip" beforeDir="false" afterPath="$PROJECT_DIR$/exercise-master/venv/bin/pip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/venv/bin/pip3" beforeDir="false" afterPath="$PROJECT_DIR$/exercise-master/venv/bin/pip3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/venv/bin/pip3.6" beforeDir="false" afterPath="$PROJECT_DIR$/exercise-master/venv/bin/pip3.6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exercise-master/venv/lib/python3.6/site-packages/setuptools-39.1.0-py3.6.egg" beforeDir="false" afterPath="$PROJECT_DIR$/exercise-master/venv/lib/python3.6/site-packages/setuptools-39.1.0-py3.6.egg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engineering_exercise/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/engineering_exercise/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fintech/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/fintech/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post_log_file" beforeDir="false" afterPath="$PROJECT_DIR$/post_log_file" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/activate" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/activate.csh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/activate.fish" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/coverage" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/coverage-3.6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/coverage3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/django-admin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/django-admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/easy_install" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/easy_install-3.6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/faker" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/ipdb3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/iptest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/iptest3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/ipython" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/ipython3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/pip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/pip3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/pip3.6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/py.test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/pygmentize" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/pytest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/python" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/python3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/bin/python3.6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/pip-selfcheck.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/pyvenv.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/share/man/man1/ipython.1.gz" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,35 +44,59 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/exercise-master/fintech/urls.py">
+        <entry file="file://$PROJECT_DIR$/requirement.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="374">
+              <caret line="28" column="21" lean-forward="true" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="469">
+              <caret line="33" column="10" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="10" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>pri</find>
+      <find>dot</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/requirement.txt" />
+        <option value="$PROJECT_DIR$/manage.py" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/fintech/views.py" />
+        <option value="$PROJECT_DIR$/engineering_exercise/settings.py" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="67" />
-    <option name="y" value="25" />
-    <option name="width" value="1613" />
-    <option name="height" value="1025" />
+    <option name="x" value="1680" />
+    <option name="y" value="-2" />
+    <option name="width" value="1680" />
+    <option name="height" value="1052" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -70,19 +107,12 @@
             <path>
               <item name="holvi-assignment" type="b2602c69:ProjectViewProjectNode" />
               <item name="holvi-assignment" type="462c0819:PsiDirectoryNode" />
-              <item name="exercise-master" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="holvi-assignment" type="b2602c69:ProjectViewProjectNode" />
-              <item name="holvi-assignment" type="462c0819:PsiDirectoryNode" />
-              <item name="exercise-master" type="462c0819:PsiDirectoryNode" />
-              <item name="fintech" type="462c0819:PsiDirectoryNode" />
+              <item name="engineering_exercise" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -92,6 +122,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/engineering_exercise" />
       <recent name="$PROJECT_DIR$/exercise-master" />
       <recent name="$PROJECT_DIR$/venv" />
     </key>
@@ -119,20 +151,19 @@
       <option name="presentableId" value="Default" />
       <updated>1551918927946</updated>
       <workItem from="1552936631018" duration="678000" />
+      <workItem from="1553186777360" duration="5249000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="678000" />
+    <option name="totallyTimeSpent" value="5927000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1613" height="1025" extended-state="6" />
+    <frame x="1680" y="-2" width="1680" height="1052" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2527122" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14198287" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -141,34 +172,82 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.5078125" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.283857" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="SciView" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32936078" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="SciView" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/exercise-master/post_log_file">
+    <entry file="file://$PROJECT_DIR$/exercise-master/post_log_file" />
+    <entry file="file://$PROJECT_DIR$/exercise-master/fintech/urls.py" />
+    <entry file="file://$PROJECT_DIR$/manage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="285">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="e#22#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exercise-master/fintech/urls.py">
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/rest_framework/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+        <state relative-caret-position="213">
+          <caret line="491" selection-start-line="491" selection-end-line="491" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engineering_exercise/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="88" column="50" lean-forward="true" selection-start-line="88" selection-start-column="50" selection-end-line="88" selection-end-column="50" />
+          <folding>
+            <element signature="e#320#329#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fintech/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fintech/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="469">
+          <caret line="33" column="10" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirement.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="28" column="21" lean-forward="true" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
         </state>
       </provider>
     </entry>

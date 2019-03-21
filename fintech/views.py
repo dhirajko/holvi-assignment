@@ -9,16 +9,19 @@ from fintech.models import Account, Transaction
 from fintech.serializers import UserSerializer, AccountSerializer, TransactionSerializer
 from fintech.utility import AccountUtility, TranasactionUtility, LogTranaction
 
+
+
 account_utility = AccountUtility()
 transaction_utility = TranasactionUtility()
 post_log_file = LogTranaction('post_log_file')
+
+
 
 
 #user
 class UserDetails(APIView):
 
     def get(self, request, *args, **kwargs):
-        print(request.user.id)
         if not request.user.is_authenticated:
             return Response(data='User not logged in',status=403)
         users = get_object_or_404(User, id=request.user.id)
@@ -69,7 +72,6 @@ class UserAccount(APIView):
     def get(self, request, user_id, *args, **kwargs):
         if not request.user.is_authenticated:
             return Response(data='User not logged in',status=403)
-        print(request.user.id)
         if not (request.user.is_staff or request.user.id == int(user_id)):
             return Response('Unauthorized user',status=401)
         serialized_accounts = account_utility.search_account(user_id)
@@ -135,7 +137,6 @@ class WithdrawView(APIView):
         if not request.user.is_authenticated:
             return Response(data='User not logged in', status=403)
         account = get_object_or_404(Account, uuid=account_id)
-        print(account.uuid)
         serializer = TransactionSerializer(data=request.data)
         if not serializer.is_valid():
             return Response(serializer.error_messages)
