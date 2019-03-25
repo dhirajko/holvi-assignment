@@ -1,11 +1,13 @@
 import datetime
 import json
+from _decimal import Decimal
+
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.test import TestCase, Client
 from django.urls import reverse
 from fintech.models import Account, Transaction
-from fintech.serializers import AccountSerializer, TransactionSerializer, UserSerializer
+
 
 
 class TestViews(TestCase):
@@ -13,12 +15,13 @@ class TestViews(TestCase):
     def setUp(self):
         self.client = Client()
 
-        self.user1 = User(username='test1', email='test1@test.com', is_staff=True, is_active=True, is_superuser=True)
+        self.user1 = User(username='user1', email='test1@test.com', is_staff=True, is_active=True, is_superuser=True)
         self.user1.set_password('test_password')
         self.user1.save()
-        self.user2 = User(username='test2', email='test2@test.com', is_staff=False, is_active=True, is_superuser=True)
+        self.user2 = User(username='user2', email='test2@test.com', is_staff=False, is_active=True, is_superuser=True)
         self.user2.set_password('test_password')
         self.user2.save()
+
 
         self.account_attributes1 = {
             'name': 'account_name',
@@ -50,96 +53,223 @@ class TestViews(TestCase):
         self.transaction1 = Transaction.objects.create(**self.transactions_attributes1)
         self.transaction2 = Transaction.objects.create(**self.transactions_attributes2)
 
-        self.serialized_user1 = UserSerializer(self.user1)
-        self.serialized_user2 = UserSerializer(self.user2)
-        self.serialized_account1 = AccountSerializer(self.account1)
-        self.serialized_account2 = AccountSerializer(self.account2)
-        self.serialized_transaction1 = TransactionSerializer(self.transaction1)
-        self.serialized_transaction2 = TransactionSerializer(self.transaction2)
-
     def test_user_login_GET(self):
         self.client.get('/admin/', follow=True)
-        login = self.client.login(username='test1', password='test_password')
+        login = self.client.login(username='user1', password='test_password')
         self.assertTrue(login)
         self.assertIn('_auth_user_id', self.client.session)
         self.assertEqual(int(self.client.session['_auth_user_id']), self.user1.pk)
 
     # authorized user logged in
     def test_user_detail_GET(self):
-        self.client.get('/admin/', follow=True)
-        login = self.client.login(username='test1', password='test_password')
+        login = self.client.login(username='user1', password='test_password')
         response = self.client.get(reverse('accounts'))
-        if login:
-            self.assertEqual(response.status_code, 200)
-            self.assertEqual(response['Content-Type'], "application/json")
-            resp = json.loads(response.content)
-            self.assertEqual(resp['id'], self.serialized_user1.data['id'])
-        else:
-            response_content = json.loads(response.content)
-            self.assertEqual(response_content, 'User not logged in')
-
-    # Test selected user
-    def test_selected_user_details_GET(self):
-        self.client.get('/admin/', follow=True)
-        args_id = 1;
-        login = self.client.login(username='test2', password='test_password')
-        response = self.client.get(reverse('selected_user_account_detail', args=[args_id]))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], "application/json")
         resp = json.loads(response.content)
 
-        if login:
-            id = int(self.client.session['_auth_user_id'])
-            user = get_object_or_404(User, id=id)
+    def test_user_detail_GET(self):
+        response = self.client.get(reverse('accounts'))
+        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response['Content-Type'], "application/json")
+        resp = json.loads(response.content)
+        self.assertEqual('User not logged in',resp)
 
-            if user.is_staff or id == args_id:
-                self.assertEqual(response.status_code, 200)
-                self.assertEqual(response['Content-Type'], "application/json")
-                self.assertEqual(resp[0]['user'], self.serialized_user2.data['id'])
+    # test other user detail as by staff user
+    def test_user_detail_with_id_by_staff(self):
+        login = self.client.login(username='user1', password='test_password')
+        response=self.client.get(reverse('accounts_by_id',args=[self.user2.id]))
+        self.assertEqual(response.status_code,200)
 
-            else:
-                self.assertEqual(resp, 'Unauthorized user')
+    # test other user detail as by non_staff user
+    def test_user_detail_with_id_by_non_staff(self):
+        login = self.client.login(username='user2', password='test_password')
+        response = self.client.get(reverse('accounts_by_id', args=[self.user2.id]))
+        self.assertEqual(response.status_code, 401)
 
-        else:
-            self.assertEqual(resp, 'User not logged in')
-
-    # test accountList
-    def test_selected_user_details_GET(self):
-        self.client.get('/admin/', follow=True)
-        login = self.client.login(username='test1', password='test_password')
+    #test own accounts list
+    def test_accounts_list_with_login(self):
+        login = self.client.login(username='user2', password='test_password')
         response = self.client.get(reverse('account_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], "application/json")
         resp = json.loads(response.content)
+        self.assertEqual(resp[0]['name'],self.account2.name)
 
-        if login:
-            self.assertEqual(response.status_code, 200)
-            self.assertEqual(response['Content-Type'], "application/json")
-            self.assertEqual(resp[0], self.serialized_account1.data)
 
-        else:
-            self.assertEqual(resp, 'User not logged in')
+    def test_account_list_without_login(self):
+        response = self.client.get(reverse('account_list'))
+        self.assertEqual(response.status_code, 403)
+        resp = json.loads(response.content)
+        self.assertEqual('User not logged in',resp)
 
-    # test for post in account_list
-    def test_selected_user_details_POST(self):
-        self.client.get('/admin/', follow=True)
-        account_holder_id = 100
-        login = self.client.login(username='test1', password='test_password')
+    #test creating account by staff user
+    def test_account_create_by_staff(self):
+        login = self.client.login(username='user1', password='test_password')
+        response=self.client.post(reverse('account_list'),
+                                  {"name":"new_test_account","balance":50,"user":self.user2.id},
+                                  content_type="application/json")
+        self.assertEqual(response.status_code,201)
+        resp = json.loads(response.content)
+        self.assertEqual(resp['user'],self.user2.id)
+
+    # test creating account by non_staff user
+    def test_account_create_by_staff(self):
+        login = self.client.login(username='user2', password='test_password')
+        response=self.client.post(reverse('account_list'),
+                                  {   'account': self.account1.uuid,
+                                      'transaction_date': datetime.datetime.now(),
+                                      'amount': 1.5,
+                                      'description': 'test',
+                                      'active': True
+                                  },
+                                  content_type="application/json")
+        self.assertEqual(response.status_code,401)
+        resp = json.loads(response.content)
+        self.assertEqual(resp,'Only staff can view account for customer')
+
+    # test creating account of invalid user
+    def test_account_create_by_non_staff(self):
+        login = self.client.login(username='user1', password='test_password')
         response = self.client.post(reverse('account_list'),
-                                    {"name": "test Saving", "balance": "100.00", "user": account_holder_id})
+                                    {"name": "new_test_account", "balance": 50, "user": 10},
+                                    content_type="application/json")
+        self.assertEqual(response.status_code, 404)
+
+    # test for checking balance of account
+    def test_balacne_of_account(self):
+        login = self.client.login(username='user1', password='test_password')
+        response = self.client.get(reverse('selected_account_balance', args=[self.account2.uuid]))
+        self.assertEqual(response.status_code, 200)
+
+    # test for checking balance of invalid user
+    def test_balace_of_other_by_non_staff(self):
+        login = self.client.login(username='user2', password='test_password')
+        response = self.client.get(reverse('selected_account_balance', args=[self.account1.uuid]))
+        self.assertEqual(response.status_code, 401)
+
+    # test for checking balance of invalid account
+    def test_balace_of_other_by_non_staff(self):
+        login = self.client.login(username='user2', password='test_password')
+        response = self.client.get(reverse('selected_account_balance', args=['387da0a2-b8b4-4939-af91-555989304312']))
+        self.assertEqual(response.status_code, 404)
+
+    #check all transaction of own account
+    def test_own_transactions(self):
+        login = self.client.login(username='user2', password='test_password')
+        response = self.client.get(reverse('own_transacton_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], "application/json")
         resp = json.loads(response.content)
+        self.assertEqual(Decimal(resp[0][0]['amount']), self.transaction1.amount)
 
-        id = int(self.client.session['_auth_user_id'])
-        user = get_object_or_404(User, id=id)
+    #test selected account transactions
+    def test_selected_account_transactions_by_staff(self):
+        login = self.client.login(username='user1', password='test_password')
+        response = self.client.get(reverse('selected_account_transacton_list',args=[self.account2.uuid]))
+        self.assertEqual(response.status_code,200)
+        resp = json.loads(response.content)
+        self.assertEqual(Decimal(resp[0]['amount']),self.transaction2.amount)
 
-        if login:
-            if user.is_staff:
+    # test selected account transactions by unauthorized user
+    def test_selected_account_transactions_by_staff(self):
+        login = self.client.login(username='user2', password='test_password')
+        response = self.client.get(reverse('selected_account_transacton_list', args=[self.account1.uuid]))
+        self.assertEqual(response.status_code, 401)
+        resp = json.loads(response.content)
+        self.assertEqual(resp,'Unauthorized user')
+
+   # Test withdraw with enough balance
+    def test_withdraw_with_enough_balance(self):
+        login = self.client.login(username='user2', password='test_password')
+        data={
+
+            "transaction_date": "2019-03-26",
+            "amount": 2.00,
+            "description": "dsfasdf",
+            "active": True,
+            "account_id":self.account2.uuid
+        }
+        transaction_response = self.client.post(reverse('withdraw_transaction'),data,content_type="application/json")
+        balance_response=self.client.get(reverse('selected_account_balance',args=[self.account2.uuid]))
+        resp_transaction=json.loads(transaction_response.content)
+        resp_balance=json.loads(balance_response.content)
+        self.assertEqual(transaction_response.status_code,200)
+        self.assertEqual(balance_response.status_code,200)
+        self.assertEqual(Decimal(resp_transaction['amount']),data['amount'])
+        self.assertEqual(Decimal(resp_balance),8.50)
+
+# Test withdraw without enough balance
+    def test_withdraw_with_enough_balance(self):
+        login = self.client.login(username='user2', password='test_password')
+        data={
+
+            "transaction_date": "2019-03-26",
+            "amount": 12.00,
+            "description": "dsfasdf",
+            "active": True,
+            "account_id":self.account2.uuid
+        }
+        transaction_response = self.client.post(reverse('withdraw_transaction'),data,content_type="application/json")
+        balance_response=self.client.get(reverse('selected_account_balance',args=[self.account2.uuid]))
+        resp_balance=json.loads(balance_response.content)
+        self.assertEqual(transaction_response.status_code,412)
+        self.assertEqual(balance_response.status_code,200)
+        self.assertEqual(Decimal(resp_balance),10.5)
+
+# Test withdraw by unauthorized user or non staff
+    def test_withdraw_with_enough_balance(self):
+        login = self.client.login(username='user2', password='test_password')
+        data={
+
+            "transaction_date": "2019-03-26",
+            "amount": 1.00,
+            "description": "dsfasdf",
+            "active": True,
+            "account_id":self.account1.uuid
+        }
+        transaction_response = self.client.post(reverse('withdraw_transaction'),data,content_type="application/json")
+        balance_response=self.client.get(reverse('selected_account_balance',args=[self.account1.uuid]))
+        resp_balance=json.loads(balance_response.content)
+        self.assertEqual(transaction_response.status_code,401)
+        self.assertEqual(balance_response.status_code,401)
+        self.assertEqual(Decimal(resp_balance),10.5)
+
+# Test withdraw to invalid account
+    def test_withdraw_with_enough_balance(self):
+        login = self.client.login(username='user1', password='test_password')
+        invalid_uuid='387da0a2-b8b4-4939-af91-555989304312'
+        data={
+
+            "transaction_date": "2019-03-26",
+            "amount": 1.00,
+            "description": "dsfasdf",
+            "active": True,
+            "account_id": invalid_uuid
+        }
+        transaction_response = self.client.post(reverse('withdraw_transaction'),data,content_type="application/json")
+        balance_response=self.client.get(reverse('selected_account_balance',args=[invalid_uuid]))
+        resp_balance=json.loads(balance_response.content)
+        self.assertEqual(transaction_response.status_code,404)
+        self.assertEqual(balance_response.status_code,404)
 
 
+  # Test deposit balance
+    def test_withdraw_with_enough_balance(self):
+        login = self.client.login(username='user1', password='test_password')
+        data={
 
-                    self.assertEqual(get_object_or_404(User,account_holder_id),resp[0] )
-                    self.assertEqual(response['Content-Type'], "application/json")
-
-
-
-            else:
-                self.assertEqual(resp, 'Only staff can create account for customer')
-
-        else:
-            self.assertEqual(resp, 'User not logged in')
+            "transaction_date": "2019-03-26",
+            "amount": 2.00,
+            "description": "dsfasdf",
+            "active": True,
+            "account_id":self.account2.uuid
+        }
+        transaction_response = self.client.post(reverse('deposit_transaction'),data,content_type="application/json")
+        balance_response=self.client.get(reverse('selected_account_balance',args=[self.account2.uuid]))
+        resp_transaction=json.loads(transaction_response.content)
+        resp_balance=json.loads(balance_response.content)
+        self.assertEqual(transaction_response.status_code,201)
+        self.assertEqual(balance_response.status_code,200)
+        self.assertEqual(Decimal(resp_transaction['amount']),data['amount'])
+        self.assertEqual(Decimal(resp_balance),12.50)

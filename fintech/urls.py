@@ -14,7 +14,7 @@ urlpatterns = [
     path('transactions', AllTransactions.as_view(), name='own_transacton_list'),
     path('<ac_uuid>/transactions', SelectedAccountTransactions.as_view(), name='selected_account_transacton_list'),
     path('<user_id>/accounts/transactions', SelectedUsersTransactions.as_view(), name='selected_user_transaction_list'),
-    path('<account_id>/withdraw',WithdrawView.as_view(),name='withdraw_transaction'),
-    path('<account_id>/deposit',DepositView.as_view(),name='deposit_transaction')
+    path('user/account/withdraw',WithdrawView.as_view(),name='withdraw_transaction'),
+    path('user/account/deposit',DepositView.as_view(),name='deposit_transaction')
 
 ]

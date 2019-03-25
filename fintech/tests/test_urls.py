@@ -41,10 +41,10 @@ class TestUrls(SimpleTestCase):
         self.assertEqual(resolve(url).func.view_class, SelectedUsersTransactions)
 
     def test_withdraw_transaction_url_resolved(self):
-        url = reverse('withdraw_transaction', args=["1"])
+        url = reverse('withdraw_transaction')
         self.assertEqual(resolve(url).func.view_class, WithdrawView)
 
     def test_deposit_transaction_url_resolved(self):
-        url = reverse('deposit_transaction', args=["1"])
+        url = reverse('deposit_transaction')
         self.assertEqual(resolve(url).func.view_class, DepositView)
 
