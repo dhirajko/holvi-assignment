@@ -61,14 +61,16 @@ class TestViews(TestCase):
         self.assertEqual(int(self.client.session['_auth_user_id']), self.user1.pk)
 
     # authorized user logged in
-    def test_user_detail_GET(self):
+    def test_user_detail_with_login_GET(self):
         login = self.client.login(username='user1', password='test_password')
         response = self.client.get(reverse('accounts'))
+        resp=json.loads(response.content)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], "application/json")
-        resp = json.loads(response.content)
+        self.assertEqual(resp['username'],self.user1.username)
 
-    def test_user_detail_GET(self):
+
+    def test_user_detail_without_login_GET(self):
         response = self.client.get(reverse('accounts'))
         self.assertEqual(response.status_code, 403)
         self.assertEqual(response['Content-Type'], "application/json")
@@ -76,19 +78,19 @@ class TestViews(TestCase):
         self.assertEqual('User not logged in',resp)
 
     # test other user detail as by staff user
-    def test_user_detail_with_id_by_staff(self):
+    def test_user_detail_with_id_by_staff_success(self):
         login = self.client.login(username='user1', password='test_password')
         response=self.client.get(reverse('accounts_by_id',args=[self.user2.id]))
         self.assertEqual(response.status_code,200)
 
     # test other user detail as by non_staff user
-    def test_user_detail_with_id_by_non_staff(self):
+    def test_get_user_detail_fails_on_unauthorized_user(self):
         login = self.client.login(username='user2', password='test_password')
         response = self.client.get(reverse('accounts_by_id', args=[self.user2.id]))
         self.assertEqual(response.status_code, 401)
 
     #test own accounts list
-    def test_accounts_list_with_login(self):
+    def test_logged_in_user_can_list_account(self):
         login = self.client.login(username='user2', password='test_password')
         response = self.client.get(reverse('account_list'))
         self.assertEqual(response.status_code, 200)
@@ -97,7 +99,7 @@ class TestViews(TestCase):
         self.assertEqual(resp[0]['name'],self.account2.name)
 
 
-    def test_account_list_without_login(self):
+    def test_get_account_list_fails_without_login(self):
         response = self.client.get(reverse('account_list'))
         self.assertEqual(response.status_code, 403)
         resp = json.loads(response.content)
@@ -235,7 +237,7 @@ class TestViews(TestCase):
         self.assertEqual(balance_response.status_code,401)
         self.assertEqual(Decimal(resp_balance),10.5)
 
-# Test withdraw to invalid account
+# Test withdraw request to invalid  account number
     def test_withdraw_with_enough_balance(self):
         login = self.client.login(username='user1', password='test_password')
         invalid_uuid='387da0a2-b8b4-4939-af91-555989304312'
@@ -249,7 +251,6 @@ class TestViews(TestCase):
         }
         transaction_response = self.client.post(reverse('withdraw_transaction'),data,content_type="application/json")
         balance_response=self.client.get(reverse('selected_account_balance',args=[invalid_uuid]))
-        resp_balance=json.loads(balance_response.content)
         self.assertEqual(transaction_response.status_code,404)
         self.assertEqual(balance_response.status_code,404)
 
@@ -273,3 +274,4 @@ class TestViews(TestCase):
         self.assertEqual(balance_response.status_code,200)
         self.assertEqual(Decimal(resp_transaction['amount']),data['amount'])
         self.assertEqual(Decimal(resp_balance),12.50)
+

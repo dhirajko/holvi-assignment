@@ -1,11 +1,9 @@
-from django.shortcuts import get_object_or_404
-
 from fintech.models import Account, Transaction
 from fintech.serializers import AccountSerializer, TransactionSerializer
 
 
 class AccountUtility:
-    def search_account(self,user_id):
+    def account_by_user_id(self,user_id):
         accounts = Account.objects.all().filter(user_id=user_id)
         serialized_accounts = []
         for account in accounts:
@@ -24,6 +22,8 @@ class TranasactionUtility:
             serialized_transactions.append(serializer.data)
         return serialized_transactions
 
+'''
+This below class can be used to log all the post transactions in different log file
 
 class LogTranaction:
     def __init__(self,filename):
@@ -34,3 +34,7 @@ class LogTranaction:
         logFile = open(self.filename, "a")
         logFile.write('{} by User{} with {} \n'.format(action, user_id, serializer))
         logFile.close()
+        
+This line can be added to write in the created log file      
+        post_log_file.post_log('create user', request.user.id, serializer.data)
+'''
