@@ -37,4 +37,5 @@ class LogTranaction:
         
 This line can be added to write in the created log file      
         post_log_file.post_log('create user', request.user.id, serializer.data)
+        
 '''

@@ -75,7 +75,7 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 403)
         self.assertEqual(response['Content-Type'], "application/json")
         resp = json.loads(response.content)
-        self.assertEqual('User not logged in',resp)
+        self.assertEqual('User not logged in',resp['msg'])
 
     # test other user detail as by staff user
     def test_user_detail_with_id_by_staff_success(self):
@@ -103,7 +103,7 @@ class TestViews(TestCase):
         response = self.client.get(reverse('account_list'))
         self.assertEqual(response.status_code, 403)
         resp = json.loads(response.content)
-        self.assertEqual('User not logged in',resp)
+        self.assertEqual('User not logged in',resp['msg'])
 
     #test creating account by staff user
     def test_account_create_by_staff(self):
@@ -128,7 +128,7 @@ class TestViews(TestCase):
                                   content_type="application/json")
         self.assertEqual(response.status_code,401)
         resp = json.loads(response.content)
-        self.assertEqual(resp,'Only staff can view account for customer')
+        self.assertEqual(resp['msg'],'Unauthorized user')
 
     # test creating account of invalid user
     def test_account_create_by_non_staff(self):
@@ -179,7 +179,7 @@ class TestViews(TestCase):
         response = self.client.get(reverse('selected_account_transacton_list', args=[self.account1.uuid]))
         self.assertEqual(response.status_code, 401)
         resp = json.loads(response.content)
-        self.assertEqual(resp,'Unauthorized user')
+        self.assertEqual(resp['msg'],'Unauthorized user')
 
    # Test withdraw with enough balance
     def test_withdraw_with_enough_balance(self):
@@ -268,10 +268,8 @@ class TestViews(TestCase):
         }
         transaction_response = self.client.post(reverse('deposit_transaction'),data,content_type="application/json")
         balance_response=self.client.get(reverse('selected_account_balance',args=[self.account2.uuid]))
-        resp_transaction=json.loads(transaction_response.content)
         resp_balance=json.loads(balance_response.content)
         self.assertEqual(transaction_response.status_code,201)
         self.assertEqual(balance_response.status_code,200)
-        self.assertEqual(Decimal(resp_transaction['amount']),data['amount'])
         self.assertEqual(Decimal(resp_balance),12.50)
 
